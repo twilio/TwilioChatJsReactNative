@@ -1,0 +1,17 @@
+{
+  "chatClient": {
+    "options": {
+      "logLevel": "info"
+    }
+  },
+  "tokenGenerator": {
+    "accountSid": "ACxxx",
+    "signingKeySid": "SKxxx",
+    "signingKeySecret": "xxx",
+    "serviceSid": "ISxxx",
+    "fcm": "CRxxx",
+    "apns": "CRxxx"
+  },
+  "ngrokSubdomain": "somengroksubdomain"
+}
+
