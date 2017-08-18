@@ -25,7 +25,7 @@
     "jest": "20.0.4",
     "ngrok": "^2.2.15",
     "react-test-renderer": "16.0.0-alpha.12",
-    "twilio": "^3.4.0"
+    "twilio": "^3.6.2"
   },
   "jest": {
     "preset": "react-native"

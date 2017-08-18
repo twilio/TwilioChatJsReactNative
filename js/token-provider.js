@@ -26,8 +26,7 @@ const TokenProvider = {
         ttl: (Number.isInteger(customTTL) ? customTTL : 3600)
       });
 
-    let grant = new AccessToken.IpMessagingGrant();
-    grant.serviceSid = credentialsFromFile.tokenGenerator.serviceSid;
+    let grant = new AccessToken.ChatGrant({ serviceSid: credentialsFromFile.tokenGenerator.serviceSid });
     if (pushChannel && pushChannel !== 'none') {
       if (credentialsFromFile.tokenGenerator[pushChannel]) {
         grant.pushCredentialSid = credentialsFromFile.tokenGenerator[pushChannel];
