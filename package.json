@@ -13,8 +13,8 @@
     "events": "^1.1.1",
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.1",
-    "twilio-chat": "1.1.1",
-    "twilio-common": "^0.1.6",
+    "twilio-chat": "1.1.2",
+    "twilio-common": "^0.1.7",
     "util": "^0.10.3"
   },
   "devDependencies": {
