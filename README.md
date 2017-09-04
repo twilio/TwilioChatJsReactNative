@@ -51,7 +51,7 @@ Additionally, ngrok exposes it's own status and inspect endpoint at http://local
 
 ## Running the app
 1. do the push registration and do all the necessary iOS and Android projects adjustments
-2. check and fill in the `configuration.sjon`
+2. check and fill in the `configuration.json`
 3. do the `npm install`
 4. run token provider: `npm run token-provider` (you can check your configuration values via http://localhost:3002/configuration)
 5. build and run React Native app
