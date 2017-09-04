@@ -58,4 +58,3 @@ Additionally, ngrok exposes it's own status and inspect endpoint at http://local
 
 ## TODO
 * pass full push payload from APN to Chat lib (currently reconstructing the json on the fly) [here](js/ApnsSupportModule.js)
-* Twilio's [AccessManager](https://github.com/twilio/twilio-common.js) using Buffer which is not imported correctly for ReactNative. [Fix is in master](https://github.com/twilio/twilio-common.js/pull/9), should be released in 0.1.7 release. 
