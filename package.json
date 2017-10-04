@@ -20,12 +20,12 @@
   "devDependencies": {
     "babel-jest": "20.0.3",
     "babel-preset-react-native": "2.0.0",
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
     "jest": "20.0.4",
-    "ngrok": "^2.2.15",
+    "ngrok": "^2.2.22",
     "react-test-renderer": "16.0.0-alpha.12",
-    "twilio": "^3.6.2"
+    "twilio": "^3.7.0"
   },
   "jest": {
     "preset": "react-native"

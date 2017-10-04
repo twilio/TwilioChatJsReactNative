@@ -50,3 +50,7 @@ export default class TwilioChatJsReactNative extends Component {
 }
 
 AppRegistry.registerComponent('TwilioChatJsReactNative', () => TwilioChatJsReactNative);
+
+// if you want to send the raw push to the JS library to reparse
+// (while app is not running), you can use this react native pattern to call static JS method
+// AppRegistry.registerHeadlessTask('FCMParsePush', () => require('./js/FCMParsePush'));

@@ -38,6 +38,9 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
+        <!--React Native pattern - call JS from Java service which is runnin even when app is not running -->
+        <!--<service android:name=".FCMParsePushService" android:enabled="true" android:label="FCMParsePushService" />-->
+
     </application>
 
 </manifest>
