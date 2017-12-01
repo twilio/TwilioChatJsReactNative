@@ -11,9 +11,9 @@
     "bluebird": "^3.5.1",
     "buffer": "^5.0.7",
     "events": "^1.1.1",
-    "react": "16.0.0-alpha.12",
+    "react": "^16.2.0",
     "react-native": "0.45.1",
-    "twilio-chat": "^1.2.1",
+    "twilio-chat": "^2.0.0",
     "twilio-common": "^0.1.7",
     "util": "^0.10.3"
   },
@@ -23,9 +23,9 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jest": "20.0.4",
-    "ngrok": "^2.2.22",
-    "react-test-renderer": "16.0.0-alpha.12",
-    "twilio": "^3.8.0"
+    "ngrok": "^2.2.24",
+    "react-test-renderer": "^16.2.0",
+    "twilio": "^3.10.0"
   },
   "jest": {
     "preset": "react-native"
