@@ -10,6 +10,7 @@
     "babel-runtime": "^6.26.0",
     "bluebird": "^3.5.1",
     "buffer": "^5.0.7",
+    "es6-shim": "^0.35.3",
     "events": "^1.1.1",
     "react": "^16.2.0",
     "react-native": "0.45.1",
