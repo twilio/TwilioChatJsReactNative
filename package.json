@@ -14,7 +14,7 @@
     "events": "^1.1.1",
     "react": "^16.2.0",
     "react-native": "0.45.1",
-    "twilio-chat": "^2.0.0",
+    "twilio-chat": "^2.0.1",
     "twilio-common": "^0.1.7",
     "util": "^0.10.3"
   },
@@ -26,7 +26,7 @@
     "jest": "20.0.4",
     "ngrok": "^2.2.24",
     "react-test-renderer": "^16.2.0",
-    "twilio": "^3.10.0"
+    "twilio": "^3.11.0"
   },
   "jest": {
     "preset": "react-native"
