@@ -9,11 +9,11 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "bluebird": "^3.5.1",
-    "buffer": "^5.0.7",
+    "buffer": "^5.1.0",
     "es6-shim": "^0.35.3",
-    "events": "^1.1.1",
+    "events": "^2.0.0",
     "react": "^16.2.0",
-    "react-native": "0.45.1",
+    "react-native": "0.53.3",
     "twilio-chat": "^2.1.0",
     "twilio-common": "^0.1.7",
     "util": "^0.10.3"
@@ -24,9 +24,9 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jest": "20.0.4",
-    "ngrok": "^2.2.24",
+    "ngrok": "^2.2.26",
     "react-test-renderer": "^16.2.0",
-    "twilio": "^3.11.0"
+    "twilio": "^3.12.0"
   },
   "jest": {
     "preset": "react-native"

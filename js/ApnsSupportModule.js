@@ -22,13 +22,18 @@ export default class ApnsSupport {
         // so, I had to construct the payload again. Send in PRs if you know the right way :)
         log.info('ApnsSupportModule.JS.registerForPushCallback', 'got new APN push event', notification);
         let rawNotification: Object = Object.assign(notification._data);
-        Object.assign(rawNotification, { aps: { alert: notification.getAlert() } });
+        if (!rawNotification.aps) {
+          rawNotification.aps = {};
+        }
+
+        rawNotification.aps.alert = notification._alert;
         if (typeof notification._badgeCount !== 'undefined') {
           PushNotificationIOS.setApplicationIconBadgeNumber(notification._badgeCount);
-          Object.assign(rawNotification, { aps: { sound: notification._badgeCount } });
+          rawNotification.aps.badge = notification._badgeCount;
         }
         if (typeof notification._sound !== 'undefined') {
-          Object.assign(rawNotification, { aps: { badge: notification._sound } });
+          rawNotification.aps.sound = notification._sound;
+
         }
         log.info('ApnsSupportModule.JS.registerForPushCallback', 'formed RAW notification', rawNotification);
         client.handlePushNotification(rawNotification);
@@ -41,8 +46,6 @@ export default class ApnsSupport {
       }).catch(err => {
       log.error('ApnsSupportModule.JS.registerForPushCallback', 'error while requesting permissions', err);
     });
-
-
   }
 
   static showPushCallback(log, push) {
