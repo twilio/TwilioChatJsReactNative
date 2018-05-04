@@ -12,8 +12,8 @@
     "buffer": "^5.1.0",
     "es6-shim": "^0.35.3",
     "events": "^2.0.0",
-    "react": "^16.2.0",
-    "react-native": "0.53.3",
+    "react": "16.3.1",
+    "react-native": "0.55.3",
     "twilio-chat": "^2.2.0",
     "twilio-common": "^0.1.7",
     "util": "^0.10.3"
@@ -24,9 +24,9 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "jest": "20.0.4",
-    "ngrok": "^2.3.0",
+    "ngrok": "^3.0.1",
     "react-test-renderer": "^16.2.0",
-    "twilio": "^3.13.1"
+    "twilio": "^3.16.0"
   },
   "jest": {
     "preset": "react-native"

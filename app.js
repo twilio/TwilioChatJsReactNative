@@ -48,11 +48,9 @@ app.listen(3002, function() {
     ngrokOptions.subdomain = config.ngrokSubdomain
   }
 
-  ngrok.once('connect', function(url) {
+  ngrok.connect(ngrokOptions).then(url=> {
     console.log('ngrok url is ' + url);
   });
-
-  ngrok.connect(ngrokOptions);
 });
 
 
