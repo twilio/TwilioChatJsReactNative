@@ -7,7 +7,6 @@
  */
 import { DeviceEventEmitter, NativeModules, ToastAndroid } from "react-native";
 
-
 export default class FirebaseSupport {
   static registerForPushCallback(log, client) {
     log.info('FirebaseSupportModule.JS.registerForPushCallback', 'requesting FCM token');
@@ -20,7 +19,7 @@ export default class FirebaseSupport {
       log.error('FirebaseSupportModule.JS.registerForPushCallback', 'error while requesting FCM token', err);
     });
 
-    DeviceEventEmitter.addListener('fcmNotificationToJs', function(e: Event) {
+    DeviceEventEmitter.addListener('fcmNotificationToJs', function(e : Event) {
       log.info('FirebaseSupportModule.JS.registerForPushCallback', 'got new FCM push event', e);
       client.handlePushNotification(e);
     });

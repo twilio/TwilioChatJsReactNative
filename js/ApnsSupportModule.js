@@ -1,7 +1,6 @@
 'use strict';
 import { AlertIOS, PushNotificationIOS } from "react-native";
 
-
 export default class ApnsSupport {
 
   static registerForPushCallback(log, client) {
@@ -17,27 +16,28 @@ export default class ApnsSupport {
     });
 
     PushNotificationIOS.addEventListener('notification', function(notification) {
-        // TODO: here we need to pass the full `raw` notification to the Chat library.
-        // however, I couldn't find the way to get the raw json from APN notification in react native,
-        // so, I had to construct the payload again. Send in PRs if you know the right way :)
-        log.info('ApnsSupportModule.JS.registerForPushCallback', 'got new APN push event', notification);
-        let rawNotification: Object = Object.assign(notification._data);
-        if (!rawNotification.aps) {
-          rawNotification.aps = {};
-        }
+                                           // TODO: here we need to pass the full `raw` notification to the Chat
+                                           // library. however, I couldn't find the way to get the raw json from APN
+                                           // notification in react native, so, I had to construct the payload again.
+                                           // Send in PRs if you know the right way :)
+                                           log.info('ApnsSupportModule.JS.registerForPushCallback', 'got new APN push event', notification);
+                                           let rawNotification : Object = Object.assign(notification._data);
+                                           if (!rawNotification.aps) {
+                                             rawNotification.aps = {};
+                                           }
 
-        rawNotification.aps.alert = notification._alert;
-        if (typeof notification._badgeCount !== 'undefined') {
-          PushNotificationIOS.setApplicationIconBadgeNumber(notification._badgeCount);
-          rawNotification.aps.badge = notification._badgeCount;
-        }
-        if (typeof notification._sound !== 'undefined') {
-          rawNotification.aps.sound = notification._sound;
+                                           rawNotification.aps.alert = notification._alert;
+                                           if (typeof notification._badgeCount !== 'undefined') {
+                                             PushNotificationIOS.setApplicationIconBadgeNumber(notification._badgeCount);
+                                             rawNotification.aps.badge = notification._badgeCount;
+                                           }
+                                           if (typeof notification._sound !== 'undefined') {
+                                             rawNotification.aps.sound = notification._sound;
 
-        }
-        log.info('ApnsSupportModule.JS.registerForPushCallback', 'formed RAW notification', rawNotification);
-        client.handlePushNotification(rawNotification);
-      }
+                                           }
+                                           log.info('ApnsSupportModule.JS.registerForPushCallback', 'formed RAW notification', rawNotification);
+                                           client.handlePushNotification(rawNotification);
+                                         }
     );
 
     PushNotificationIOS.requestPermissions()
