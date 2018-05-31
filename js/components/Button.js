@@ -8,20 +8,20 @@ import {
 
 const Button = (props) => {
 
-  function getContent(){
-    if(props.children){
+  function getContent() {
+    if (props.children) {
       return props.children;
     }
-    return <Text style={props.styles.label}>{props.label}</Text>
+    return <Text style={ props.styles.label }>{ props.label }</Text>
   }
 
   return (
     <TouchableHighlight
       underlayColor="#ccc"
-      onPress={props.onPress}
-      style={[
+      onPress={ props.onPress }
+      style={ [
         props.noDefaultStyles ? '' : styles.button,
-        props.styles ? props.styles.button : '']}
+        props.styles ? props.styles.button : ''] }
     >
       { getContent() }
     </TouchableHighlight>
@@ -29,11 +29,11 @@ const Button = (props) => {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20
-  },
-});
+                                   button: {
+                                     alignItems: 'center',
+                                     justifyContent: 'center',
+                                     padding: 20
+                                   },
+                                 });
 
 export default Button;

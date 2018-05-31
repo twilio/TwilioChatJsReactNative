@@ -12,10 +12,10 @@ const TokenProvider = {
     }
 
     if (!credentialsFromFile.tokenGenerator ||
-      !credentialsFromFile.tokenGenerator.accountSid ||
-      !credentialsFromFile.tokenGenerator.serviceSid ||
-      !credentialsFromFile.tokenGenerator.signingKeySid ||
-      !credentialsFromFile.tokenGenerator.signingKeySecret) {
+        !credentialsFromFile.tokenGenerator.accountSid ||
+        !credentialsFromFile.tokenGenerator.serviceSid ||
+        !credentialsFromFile.tokenGenerator.signingKeySid ||
+        !credentialsFromFile.tokenGenerator.signingKeySecret) {
       throw new Error(`${new Date()} [token-generator] [ERROR] No full credentials found in configuration.json`);
     }
     let token = new AccessToken(
