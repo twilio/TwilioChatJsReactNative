@@ -1,22 +1,31 @@
 'use strict';
 
 import { Client as TwilioChatClient } from "twilio-chat";
+import { Buffer } from "buffer";
 import "react-native";
 
 export default class ChatClientHelper {
   host;
+  basicAuthHeaders;
   log;
   client;
 
-  constructor(tokenAndConfigurationProviderHost, log) {
+  constructor(tokenAndConfigurationProviderHost, basicAuth, log) {
     this.host = tokenAndConfigurationProviderHost;
+    if (basicAuth) {
+      this.basicAuthHeaders =
+        new Headers({
+                      "Authorization": `Basic ${ new Buffer(`${ basicAuth.username }:${ basicAuth.password }`).toString("base64") }`
+                    })
+    }
+    this.basicAuth = basicAuth;
     this.log = log;
     this.client = null;
   }
 
   login(identity, pushChannel, registerForPushCallback, showPushCallback) {
     let that = this;
-    return fetch(`${this.host}/chat-client-configuration.json`)
+    return fetch(`${ this.host }/chat-client-configuration.json`, { headers: this.basicAuthHeaders })
       .then((response) => {
         let chatClientConfig = response.json();
         that.log.info('login', 'Got Chat client configuration', chatClientConfig);
@@ -50,13 +59,15 @@ export default class ChatClientHelper {
       .catch((err) => {
         that.log.error('login', 'can\'t fetch Chat Client configuration', err);
       });
-  };
+  }
+  ;
 
   getToken(identity, pushChannel) {
     if (!pushChannel) {
       pushChannel = 'none';
     }
-    return fetch(`${this.host}/token?identity=${identity}&pushChannel=${pushChannel}`)
+    return fetch(`${ this.host }/token?identity=${ identity }&pushChannel=${ pushChannel }`,
+                 { headers: this.basicAuthHeaders })
       .then(response => {
         return response.text();
       });
@@ -93,5 +104,6 @@ export default class ChatClientHelper {
                    obj => this.log.event('ChatClientHelper.client', 'connectionStateChanged', obj));
 
     this.client.on('pushNotification', obj => this.log.event('ChatClientHelper.client', 'onPushNotification', obj));
-  };
+  }
+  ;
 };

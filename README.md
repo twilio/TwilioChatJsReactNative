@@ -34,7 +34,9 @@ Token is provided by locally running [express.js app](app.js). The app uses ngro
 Configuration for token provider and chat library are stored in the `configuration.json` file. The example with correct structure can be learned from [configuration.example.json](configuration.example.json):
 * `chatClient` holds the key `options`. Those are options for Chat client creation, passed as [ClientOptions](http://media.twiliocdn.com/sdk/js/chat/releases/1.2.0/docs/Client.html#ClientOptions) described in Twilio Programmable Chat documentation. 
 * `tokenGenerator` contains keys needed for token composition (`accountSid`, `signingKeySid`, `signingKeySecret` and `serviceSid` keys) and Credential SIDs for APN and FCM you've created earlier (`fcm` and `apn` keys). 
-* `ngrokSubdomain` is optional field if you want to start ngrok with predefined subdomain for token generation
+* `ngrok` structure configures ngrok:
+    * set `subdomain` if you want to start ngrok with predefined subdomain for token generation
+    * set `basicAuth` structure if you want your token generator to be password-protected (which is strongly encouraged by Twilio)
 ```
 {
   "chatClient": { 
@@ -50,7 +52,13 @@ Configuration for token provider and chat library are stored in the `configurati
     "fcm": "CRxxx",
     "apns": "CRxxx"
   },
-  "ngrokSubdomain": "somengroksubdomain"
+  "ngrok": {
+    "subdomain": "somengroksubdomain",
+    "basicAuth": {
+      "username": "someusername",
+      "password": "somepassword"
+    }
+  }
 }
 ```
 
@@ -59,7 +67,6 @@ Token provider runs on port `3002` on `localhost` and is exposed to the internet
 Token provider has multiple exposed endpoints:
  * http://localhost:3002/chat-client-configuration.json (and `http://<yourngroksubdomain>.ngrok.io/chat-client-configuration.json`) your Chat configuration in json format
  * http://localhost:3002/token (and `http://<yourngroksubdomain>.ngrok.io/token`) token generator GET endpoint, takes in query parameters `identity` and `pushChannel` (`fcm` or `apns`)
- * http://localhost:3002/configuration (and `http://<yourngroksubdomain>.ngrok.io/configuration`) exposes full `configuration.json` for debugging the app
 
 Additionally, ngrok exposes it's own status and inspect endpoint at http://localhost:4040
 

@@ -12,6 +12,12 @@
     "fcm": "CRxxx",
     "apns": "CRxxx"
   },
-  "ngrokSubdomain": "somengroksubdomain"
+  "ngrok": {
+    "subdomain": "somengroksubdomain",
+    "basicAuth": {
+      "username": "someusername",
+      "password": "somepassword"
+    }
+  }
 }
 

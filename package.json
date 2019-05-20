@@ -8,24 +8,25 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "bluebird": "^3.5.1",
+    "bluebird": "^3.5.4",
     "buffer": "^5.1.0",
-    "es6-shim": "^0.35.3",
+    "es6-shim": "^0.35.5",
     "events": "^2.0.0",
-    "react": "16.3.2",
-    "react-native": "0.55.4",
-    "twilio-chat": "^3.2.0",
-    "util": "^0.10.3"
+    "react": "^16.8.6",
+    "react-native": "^0.59.8",
+    "twilio-chat": "^3.2.3",
+    "util": "^0.12.0"
   },
   "devDependencies": {
-    "babel-jest": "22.4.3",
-    "babel-preset-react-native": "4.0.0",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "jest": "22.4.3",
-    "ngrok": "^3.0.1",
-    "react-test-renderer": "^16.2.0",
-    "twilio": "^3.16.0"
+    "babel-jest": "^24.8.0",
+    "basic-auth-connect": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.0",
+    "jest": "^24.8.0",
+    "metro-react-native-babel-preset": "^0.54.1",
+    "ngrok": "^3.1.1",
+    "react-test-renderer": "^16.8.6",
+    "twilio": "^3.31.0"
   },
   "jest": {
     "preset": "react-native"

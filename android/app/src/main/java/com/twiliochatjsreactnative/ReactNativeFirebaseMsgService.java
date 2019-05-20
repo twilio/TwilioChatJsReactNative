@@ -2,6 +2,7 @@ package com.twiliochatjsreactnative;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.NotificationChannel;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,10 +41,23 @@ public class ReactNativeFirebaseMsgService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        String channelId = "TwilioChatJsReactNative_default_channel_id";
+        String channelDescription = "TwilioChatJsReactNative Default Channel";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelId);
+            if (notificationChannel == null) {
+                int importance = NotificationManager.IMPORTANCE_HIGH; //Set the importance level
+                notificationChannel = new NotificationChannel(channelId, channelDescription, importance);
+                notificationChannel.enableVibration(true); //Set if it is necesssary
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+        }
+
         notificationManager.notify(0, new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("TwilioChatJSReactNative")
                 .setContentText(notificationPayload.getBody())
+                .setChannelId(channelId)
                 .build());
     }
 
