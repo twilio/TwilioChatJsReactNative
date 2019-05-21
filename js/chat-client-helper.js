@@ -15,7 +15,8 @@ export default class ChatClientHelper {
     if (basicAuth) {
       this.basicAuthHeaders =
         new Headers({
-                      "Authorization": `Basic ${ new Buffer(`${ basicAuth.username }:${ basicAuth.password }`).toString("base64") }`
+                      "Authorization":
+                        `Basic ${ new Buffer(`${ basicAuth.username }:${ basicAuth.password }`).toString("base64") }`
                     })
     }
     this.basicAuth = basicAuth;
@@ -60,7 +61,6 @@ export default class ChatClientHelper {
         that.log.error('login', 'can\'t fetch Chat Client configuration', err);
       });
   }
-  ;
 
   getToken(identity, pushChannel) {
     if (!pushChannel) {
@@ -85,7 +85,14 @@ export default class ChatClientHelper {
     this.client.on('channelAdded', obj => this.log.event('ChatClientHelper.client', 'channelAdded', obj));
     this.client.on('channelRemoved', obj => this.log.event('ChatClientHelper.client', 'channelRemoved', obj));
     this.client.on('channelInvited', obj => this.log.event('ChatClientHelper.client', 'channelInvited', obj));
-    this.client.on('channelJoined', obj => this.log.event('ChatClientHelper.client', 'channelJoined', obj));
+    this.client.on('channelJoined', obj => {
+      this.log.event('ChatClientHelper.client', 'channelJoined', obj);
+      obj.getMessages(1).then(messagesPaginator => {
+        messagesPaginator.items.forEach(message => {
+          this.log.info('ChatClientHelper.client', obj.sid + ' last message sid ' + message.sid)
+        })
+      })
+    });
     this.client.on('channelLeft', obj => this.log.event('ChatClientHelper.client', 'channelLeft', obj));
     this.client.on('channelUpdated', obj => this.log.event('ChatClientHelper.client', 'channelUpdated', obj));
 
@@ -105,5 +112,4 @@ export default class ChatClientHelper {
 
     this.client.on('pushNotification', obj => this.log.event('ChatClientHelper.client', 'onPushNotification', obj));
   }
-  ;
 };
