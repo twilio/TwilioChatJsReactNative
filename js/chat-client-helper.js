@@ -1,22 +1,32 @@
 'use strict';
 
 import { Client as TwilioChatClient } from "twilio-chat";
+import { Buffer } from "buffer";
 import "react-native";
 
 export default class ChatClientHelper {
   host;
+  basicAuthHeaders;
   log;
   client;
 
-  constructor(tokenAndConfigurationProviderHost, log) {
+  constructor(tokenAndConfigurationProviderHost, basicAuth, log) {
     this.host = tokenAndConfigurationProviderHost;
+    if (basicAuth) {
+      this.basicAuthHeaders =
+        new Headers({
+                      "Authorization":
+                        `Basic ${ new Buffer(`${ basicAuth.username }:${ basicAuth.password }`).toString("base64") }`
+                    })
+    }
+    this.basicAuth = basicAuth;
     this.log = log;
     this.client = null;
   }
 
   login(identity, pushChannel, registerForPushCallback, showPushCallback) {
     let that = this;
-    return fetch(`${this.host}/chat-client-configuration.json`)
+    return fetch(`${ this.host }/chat-client-configuration.json`, { headers: this.basicAuthHeaders })
       .then((response) => {
         let chatClientConfig = response.json();
         that.log.info('login', 'Got Chat client configuration', chatClientConfig);
@@ -50,13 +60,14 @@ export default class ChatClientHelper {
       .catch((err) => {
         that.log.error('login', 'can\'t fetch Chat Client configuration', err);
       });
-  };
+  }
 
   getToken(identity, pushChannel) {
     if (!pushChannel) {
       pushChannel = 'none';
     }
-    return fetch(`${this.host}/token?identity=${identity}&pushChannel=${pushChannel}`)
+    return fetch(`${ this.host }/token?identity=${ identity }&pushChannel=${ pushChannel }`,
+                 { headers: this.basicAuthHeaders })
       .then(response => {
         return response.text();
       });
@@ -74,7 +85,14 @@ export default class ChatClientHelper {
     this.client.on('channelAdded', obj => this.log.event('ChatClientHelper.client', 'channelAdded', obj));
     this.client.on('channelRemoved', obj => this.log.event('ChatClientHelper.client', 'channelRemoved', obj));
     this.client.on('channelInvited', obj => this.log.event('ChatClientHelper.client', 'channelInvited', obj));
-    this.client.on('channelJoined', obj => this.log.event('ChatClientHelper.client', 'channelJoined', obj));
+    this.client.on('channelJoined', obj => {
+      this.log.event('ChatClientHelper.client', 'channelJoined', obj);
+      obj.getMessages(1).then(messagesPaginator => {
+        messagesPaginator.items.forEach(message => {
+          this.log.info('ChatClientHelper.client', obj.sid + ' last message sid ' + message.sid)
+        })
+      })
+    });
     this.client.on('channelLeft', obj => this.log.event('ChatClientHelper.client', 'channelLeft', obj));
     this.client.on('channelUpdated', obj => this.log.event('ChatClientHelper.client', 'channelUpdated', obj));
 
@@ -93,5 +111,5 @@ export default class ChatClientHelper {
                    obj => this.log.event('ChatClientHelper.client', 'connectionStateChanged', obj));
 
     this.client.on('pushNotification', obj => this.log.event('ChatClientHelper.client', 'onPushNotification', obj));
-  };
+  }
 };

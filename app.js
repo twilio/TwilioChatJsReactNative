@@ -5,6 +5,7 @@ const config = require('./configuration.json');
 const TokenProvider = require('./js/token-provider');
 const bodyParser = require('body-parser');
 const ngrok = require('ngrok');
+const basicAuth = require('basic-auth-connect');
 
 
 const app = express();
@@ -12,18 +13,13 @@ const app = express();
 app.set('json spaces', 2);
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+if (config.ngrok.basicAuth && config.ngrok.basicAuth.username && config.ngrok.basicAuth.password) {
+  app.use(basicAuth(config.ngrok.basicAuth.username, config.ngrok.basicAuth.password));
+}
 
 app.get('/chat-client-configuration.json', function(req, res) {
   if (config.chatClient) {
     res.json(config.chatClient);
-  } else {
-    res.json({});
-  }
-});
-
-app.get('/configuration', function(req, res) {
-  if (config) {
-    res.json(config);
   } else {
     res.json({});
   }
@@ -44,8 +40,8 @@ app.listen(3002, function() {
     proto: 'http',
     addr: 3002
   };
-  if (config.ngrokSubdomain) {
-    ngrokOptions.subdomain = config.ngrokSubdomain
+  if (config.ngrok.subdomain) {
+    ngrokOptions.subdomain = config.ngrok.subdomain
   }
 
   ngrok.connect(ngrokOptions).then(url=> {

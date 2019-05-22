@@ -48,15 +48,13 @@ buck-out/
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/
 
-configuration.*json
-!configuration.example.json
-/android/app/google-services.*json
-!/android/app/google-services.example.json
-certificates
-.tmp/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
 
 # Bundle artifact
 *.jsbundle
+configuration.json
+google-services.json
+certificates
+gradle.release.properties

@@ -5,15 +5,17 @@
  */
 
 import React, { Component } from "react";
-import { AppRegistry } from "react-native";
+import { AppRegistry, Platform } from "react-native";
 import Login from "./js/components/Login";
 import EventsLog from "./js/components/EventsLog";
 import ChatClientHelper from "./js/chat-client-helper";
 import Log from "./js/logging";
 import FirebaseSupport from "./js/FirebaseSupportModule";
+import ApnSupport from "./js/ApnsSupportModule";
 
-ngrokSubdomainName = require('./configuration.json').ngrokSubdomain;
-const host = 'http://' + ngrokSubdomainName + '.ngrok.io';
+const ngrokConfiguration = require('./configuration.json').ngrok;
+const tokenHost = 'https://' + ngrokConfiguration.subdomain + '.ngrok.io';
+const tokenBasicAuth = ngrokConfiguration.basicAuth;
 
 export default class TwilioChatJsReactNative extends Component {
 
@@ -24,9 +26,15 @@ export default class TwilioChatJsReactNative extends Component {
 
   login(username, host) {
     let log = new Log(this.addNewLog.bind(this));
-    let chatClientHelper = new ChatClientHelper(host, log);
-    chatClientHelper.login(
-      username, 'fcm', FirebaseSupport.registerForPushCallback, FirebaseSupport.showPushCallback);
+    let chatClientHelper = new ChatClientHelper(host, tokenBasicAuth, log);
+
+    if (Platform.OS === 'ios') {
+      chatClientHelper.login(
+        username, 'apns', ApnSupport.registerForPushCallback, ApnSupport.showPushCallback);
+    } else if (Platform.OS === 'android') {
+      chatClientHelper.login(
+        username, 'fcm', FirebaseSupport.registerForPushCallback, FirebaseSupport.showPushCallback);
+    }
     this.setState({ chatClientHelper });
   }
 
@@ -39,11 +47,11 @@ export default class TwilioChatJsReactNative extends Component {
   render() {
     if (this.state.chatClientHelper === null) {
       return (
-        <Login host={ host } login={ this.login.bind(this) }/>
+        <Login host={ tokenHost } login={ this.login.bind(this) }/>
       );
     } else {
       return (
-        <EventsLog eventslog={ this.state.log } />
+        <EventsLog eventslog={ this.state.log }/>
       );
     }
   }
