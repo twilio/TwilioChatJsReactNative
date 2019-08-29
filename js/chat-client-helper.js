@@ -16,7 +16,7 @@ export default class ChatClientHelper {
       this.basicAuthHeaders =
         new Headers({
                       "Authorization":
-                        `Basic ${ new Buffer(`${ basicAuth.username }:${ basicAuth.password }`).toString("base64") }`
+                        `Basic ${ Buffer.from(`${ basicAuth.username }:${ basicAuth.password }`).toString("base64") }`
                     })
     }
     this.basicAuth = basicAuth;

@@ -9,22 +9,30 @@ export default class Log {
   }
 
   event(eventScope, eventName, obj) {
-    console.log(`${new Date()} [${eventScope}] [EVENT ${eventName}]`);
-    this.callback(`${new Date()} [${eventScope}] [EVENT ${eventName}]`)
+    console.log(`${ new Date() } [${ eventScope }] [EVENT ${ eventName }]`);
+    if (this.callback) {
+      this.callback(`${ new Date() } [${ eventScope }] [EVENT ${ eventName }]`)
+    }
   };
 
   info(eventScope, text, obj) {
-    console.log(`${new Date()} [${eventScope}] [INFO] ${text}`, obj);
-    this.callback(`${new Date()} [${eventScope}] [INFO] ${text}`)
+    console.log(`${ new Date() } [${ eventScope }] [INFO] ${ text }`, obj);
+    if (this.callback) {
+      this.callback(`${ new Date() } [${ eventScope }] [INFO] ${ text }`)
+    }
   };
 
   error(eventScope, text, obj) {
-    console.error(`${new Date()} [${eventScope}] [ERROR] ${text}`, obj);
-    this.callback(`${new Date()} [${eventScope}] [ERROR] ${text}`)
+    console.error(`${ new Date() } [${ eventScope }] [ERROR] ${ text }`, obj);
+    if (this.callback) {
+      this.callback(`${ new Date() } [${ eventScope }] [ERROR] ${ text }`)
+    }
   };
 
   warn(eventScope, text, obj) {
-    console.warn(`${new Date()} [${eventScope}] [WARN] ${text}`, obj);
-    this.callback(`${new Date()} [${eventScope}] [WARN] ${text}`)
+    console.warn(`${ new Date() } [${ eventScope }] [WARN] ${ text }`, obj);
+    if (this.callback) {
+      this.callback(`${ new Date() } [${ eventScope }] [WARN] ${ text }`)
+    }
   }
 };
