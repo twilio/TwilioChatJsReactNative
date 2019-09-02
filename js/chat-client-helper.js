@@ -90,7 +90,13 @@ export default class ChatClientHelper {
       obj.getMessages(1).then(messagesPaginator => {
         messagesPaginator.items.forEach(message => {
           this.log.info('ChatClientHelper.client', obj.sid + ' last message sid ' + message.sid)
-        })
+        });
+
+        if (Math.random() < 0.3) {
+          setTimeout(function () {
+            obj.leave()
+          }, 10000);
+        }
       })
     });
     this.client.on('channelLeft', obj => this.log.event('ChatClientHelper.client', 'channelLeft', obj));
