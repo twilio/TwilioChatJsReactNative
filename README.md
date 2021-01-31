@@ -77,5 +77,15 @@ Additionally, ngrok exposes it's own status and inspect endpoint at http://local
 4. run token provider: `npm run token-provider` (you can check your configuration values via http://localhost:3002/configuration)
 5. build and run React Native app
 
+## Projects
+
+- [react-native-twilio-chat](https://github.com/Gapur/react-native-twilio-chat)
+
+## Articles
+
+- ["Build a Twilio-Powered Chat App Using React Native"](https://medium.com/better-programming/build-a-twilio-powered-chat-app-using-reactn-ative-2460b7995a30) - *Gapur Kassym*
+- ["Implementing Chat in JavaScript, Node.js and React Apps"](https://www.twilio.com/blog/2017/10/implement-chat-javascript-nodejs-react-apps.html) - *Kevin Thompson*
+- ["Build a Chat App with Twilio Programmable Chat and React.js"](https://www.twilio.com/blog/build-a-chat-app-with-twilio-programmable-chat-and-react) - *Huzaima Khan*
+
 ## TODO
 * pass full push payload from APN to Chat lib (currently reconstructing the json on the fly) [here](js/ApnsSupportModule.js)
