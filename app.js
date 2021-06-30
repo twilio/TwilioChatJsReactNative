@@ -46,6 +46,8 @@ app.listen(3002, function() {
 
   ngrok.connect(ngrokOptions).then(url=> {
     console.log('ngrok url is ' + url);
+  }).catch((e) => {
+    console.error(e);
   });
 });
 
